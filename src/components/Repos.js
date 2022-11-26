@@ -37,7 +37,13 @@ const Repos = () => {
       return { ...item, value: item.stars };
     })
     .slice(0, 5);
-  console.log(mostPopular);
+
+  // Stars and Forks
+
+  let { stars, forks } = repos.reduce(() => {}, {
+    stars: {},
+    forks: {},
+  });
 
   const chartData = [
     {
@@ -58,9 +64,9 @@ const Repos = () => {
     <section className="section">
       <Wrapper className="section-center">
         <Pie3D data={mostUsed}></Pie3D>
-        <div></div>
+        <Column3D data={chartData} />
         <Doughnut2D data={mostPopular} />
-        <div></div>;
+        <Bar3D data={chartData} />
       </Wrapper>
     </section>
   );

@@ -7,8 +7,11 @@ const Search = () => {
   //get things from global context
   const handleSubmit = (e) => {
     e.preventDefault(user);
-    if(user)
+    if (user) {
+    }
     //more logic coming up soon
+    //optional
+    //setUser("");
   };
   return (
     <section className="section">

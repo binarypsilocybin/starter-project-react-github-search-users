@@ -3,7 +3,6 @@ import mockUser from "./mockData.js/mockUser";
 import mockRepos from "./mockData.js/mockRepos";
 import mockFollowers from "./mockData.js/mockFollowers";
 import axios from "axios";
-import { createContext } from "react";
 
 const rootUrl = "https://api.github.com";
 
@@ -15,6 +14,25 @@ const GithubProvider = ({ children }) => {
   const [githubUser, setGithubUser] = useState(mockUser);
   const [repos, setRepos] = useState(mockRepos);
   const [followers, setFollowers] = useState(mockFollowers);
+
+  //request loading
+  const [request, setResquest] = useState(0);
+  const [loading, setIsLoading] = useState(false);
+
+  // check rate
+
+  const checkRequests = () => {
+    axios(`${rootUrl}/rate_limit`)
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  //error
+
+  useEffect(checkRequests, []);
+
   return (
     <GithubContext.Provider value={{ githubUser, repos, followers }}>
       {children}
